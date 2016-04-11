@@ -1,0 +1,13 @@
+licenseheader.txt
+nb-configuration.xml
+
+#ignore all files in the builds
+build/ 
+
+
+#ignore all files in the target
+target/ 
+
+
+#ignore all files in the lib
+lib/
