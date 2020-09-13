@@ -1,40 +1,33 @@
 package no.satyam.spring.northwind.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import no.satyam.spring.northwind.adapter.ToStringGenerator;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
 
 /**
  *
  * @author srt
  */
-@Entity
-public class Category extends AbstractPersistable<Long> {
 
-    private static final long serialVersionUID = 1L;
+public class Category {
 
-    @Column(unique = true)
+    @Id
+    private UUID id;
     private String name;
     private String description;
-
-    @OneToMany(mappedBy = "category")
-    private Set<Product> products = new HashSet<>();
-
-    public Category() {
-    }
 
     public Category(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -52,18 +45,4 @@ public class Category extends AbstractPersistable<Long> {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
-    @Override
-    public String toString() {
-        return ToStringGenerator.generateInMultiLine(this);
-    }
-
 }
