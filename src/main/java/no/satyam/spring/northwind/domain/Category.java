@@ -2,9 +2,9 @@ package no.satyam.spring.northwind.domain;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.adapter.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -21,6 +21,7 @@ public class Category extends AbstractPersistable<Long> {
     private String name;
     private String description;
 
+    // mappedBy indicating 'category' owns the relationship.
     @OneToMany(mappedBy = "category")
     private Set<Product> products = new HashSet<>();
 

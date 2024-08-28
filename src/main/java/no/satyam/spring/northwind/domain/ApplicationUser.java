@@ -1,7 +1,7 @@
 package no.satyam.spring.northwind.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import no.satyam.spring.northwind.adapter.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 

@@ -2,10 +2,8 @@ package no.satyam.spring.northwind.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import jakarta.persistence.*;
 import no.satyam.spring.northwind.adapter.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -28,9 +26,11 @@ public class Product extends AbstractPersistable<Long> {
     private Boolean discontinued;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
     @OneToMany(mappedBy = "product")

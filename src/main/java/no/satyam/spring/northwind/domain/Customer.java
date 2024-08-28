@@ -2,9 +2,10 @@ package no.satyam.spring.northwind.domain;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.adapter.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -30,6 +31,7 @@ public class Customer extends AbstractPersistable<Long> {
     private String phone;
     private String fax;
 
+    // customer is the owning side
     @OneToMany(mappedBy = "customer")
     private Set<SalesOrder> salesOrders = new HashSet<>();
 

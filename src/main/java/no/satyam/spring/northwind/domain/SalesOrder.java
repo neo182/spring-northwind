@@ -3,10 +3,8 @@ package no.satyam.spring.northwind.domain;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import jakarta.persistence.*;
 import no.satyam.spring.northwind.adapter.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -31,12 +29,15 @@ public class SalesOrder extends AbstractPersistable<Long> {
     private String shipCountry;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "shipper_id")
     private Shipper shipper;
 
     @OneToMany(mappedBy = "salesOrder", fetch = FetchType.LAZY)

@@ -2,7 +2,9 @@ licenseheader.txt
 nb-configuration.xml
 
 #ignore all files in the builds
-build/ 
+build/
+.idea
+*.iml
 
 
 #ignore all files in the target
