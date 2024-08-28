@@ -1,11 +1,14 @@
 package no.satyam.spring.northwind.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.apache.log4j.Logger;
+
 
 /**
  *
@@ -13,7 +16,7 @@ import org.apache.log4j.Logger;
  */ 
 public class DateTimeUtil {
 
-    private static final Logger log = LoggerFactory.make();
+    private static final Logger log = LogManager.getLogger();
 
     public static String formatTime(Time time, String pattern) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

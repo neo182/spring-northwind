@@ -5,7 +5,9 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,7 +19,7 @@ import static no.satyam.spring.northwind.util.DateTimeUtil.*;
  */
 public class DateTimeUtilTest {
     
-    private static final Logger log = LoggerFactory.make();
+    private static final Logger log = LogManager.getLogger();
     private Date testDate;
     private final String testDatoStr = "31/12/2014";
 

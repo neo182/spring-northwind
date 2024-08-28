@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.adapter.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;

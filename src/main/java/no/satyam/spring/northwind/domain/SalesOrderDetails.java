@@ -2,6 +2,7 @@ package no.satyam.spring.northwind.domain;
 
 import java.math.BigDecimal;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import no.satyam.spring.northwind.adapter.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -20,9 +21,11 @@ public class SalesOrderDetails extends AbstractPersistable<Long> {
     private BigDecimal discount;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "salesorder_id")
     private SalesOrder salesOrder;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public SalesOrderDetails() {

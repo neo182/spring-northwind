@@ -1,6 +1,5 @@
 package no.satyam.spring.northwind.util;
 
-import org.apache.log4j.Logger;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -10,11 +9,7 @@ import org.testng.annotations.Test;
  */
 public class LoggerFactoryTest {
 
-    @Test(groups = {"unit"})
-    public void testMakeWorksProperly() {
-        Logger log = LoggerFactory.make();
-        assertNotNull(log);
-    }
+
 
     @Test(groups = {"unit"})
     public void testMakeSlf4jWorksProperly() {

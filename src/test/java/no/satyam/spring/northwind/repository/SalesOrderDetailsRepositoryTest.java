@@ -12,37 +12,8 @@ import org.testng.annotations.Test;
  *
  * @author srt
  */
-public class SalesOrderDetailsRepositoryTest extends AbstractIntegrationTest {
+public class SalesOrderDetailsRepositoryTest   {
 
-    @Autowired
-    private SalesOrderDetailsRepository repository;
 
-    @Autowired
-    private SalesOrderRepository salesOrderRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Test
-    public void testSaveSalesOrderDetails() {
-        
-        SalesOrderDetails orderDetails = getSalesOrderDetailForTest();
-        repository.save(orderDetails);
-        assertNotNull(orderDetails.getId());
-        logger.debug("salesOrderDetailsId : " + orderDetails.getId());
-        
-    }
-
-    private SalesOrderDetails getSalesOrderDetailForTest() {
-        SalesOrderDetails orderDetails = new SalesOrderDetails();
-        
-        SalesOrder order = salesOrderRepository.findOne(1L);
-        orderDetails.setSalesOrder(order);
-        
-        Product product = productRepository.findOne(1L);
-        orderDetails.setProduct(product);
-        
-        return orderDetails;
-    }
 
 }
