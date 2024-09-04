@@ -34,15 +34,15 @@ public class ApplicationUserDaoTest {
 
 	@Test
 	public void shouldCreateAapplicationUser() {
-		ApplicationUser persistedapplicationApplicationUser = applicationUserDao.create(applicationUser);
-		assertApplicationUser(persistedapplicationApplicationUser);
+		ApplicationUser persistedApplicationUser = applicationUserDao.create(applicationUser);
+		assertApplicationUser(persistedApplicationUser);
 	}
 
 	@Test
 	public void shouldReadAPersistedApplicationUser() throws Exception {
 		ApplicationUser persistedApplicationUser = applicationUserDao.create(applicationUser);
-		ApplicationUser applicationUserReadByPrimaryKey = applicationUserDao.findOne(persistedApplicationUser.getId());
-		assertApplicationUser(applicationUserReadByPrimaryKey);
+		ApplicationUser applicationUserById = applicationUserDao.findOne(persistedApplicationUser.getId());
+		assertApplicationUser(applicationUserById);
 	}
 
 	private void assertApplicationUser(ApplicationUser persistedApplicationUser) {
