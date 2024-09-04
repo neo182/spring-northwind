@@ -1,7 +1,7 @@
 package no.satyam.spring.northwind.dao;
 
 import no.satyam.spring.northwind.config.HibernateConfig;
-import no.satyam.spring.northwind.domain.ApplicationUser;
+import no.satyam.spring.northwind.domain.Category;
 import no.satyam.spring.northwind.testutil.TestDataProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,44 +19,44 @@ import static org.hamcrest.Matchers.*;
 @ContextConfiguration(classes = { HibernateConfig.class })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ExtendWith(SpringExtension.class)
-public class ApplicationUserDaoTest {
+class CategoryDaoTest {
 
 	@Autowired
-	private ApplicationUserDao applicationUserDao;
+	private CategoryDao categoryDao;
 
 	@Autowired
 	private TestDataProvider dataProvider;
 
-	private ApplicationUser applicationUser;
+	private Category category;
 
 	@BeforeEach
 	public void setUp() {
-		applicationUser = dataProvider.getApplicationUser();
+		category = dataProvider.getCategory();
 	}
 
 	@Test
 	public void shouldDoCRUDOperationsWithApplicationUser() {
 		// Create
-		ApplicationUser persistedUser = applicationUserDao.create(applicationUser);
-		assertThat(persistedUser.getId(), is(notNullValue()));
+		Category persistedCategory = categoryDao.create(category);
+		assertThat(persistedCategory.getId(), is(notNullValue()));
 
 		// Read
-		ApplicationUser userById = applicationUserDao.findOne(persistedUser.getId());
-		assertThat(userById, is(notNullValue()));
-		assertThat(userById.getUserName(), equalTo(applicationUser.getUserName()));
-		assertThat(userById.getPassword(), equalTo(applicationUser.getPassword()));
+		Category categoryById = categoryDao.findOne(persistedCategory.getId());
+		assertThat(categoryById, is(notNullValue()));
+		assertThat(categoryById.getName(), equalTo(category.getName()));
+		assertThat(categoryById.getDescription(), equalTo(category.getDescription()));
 
 		// Update
-		userById.setUserName("NewUserName");
-		userById.setPassword("NewPass");
-		ApplicationUser updatedUser = applicationUserDao.update(userById);
-		assertThat(updatedUser.getUserName(), equalTo("NewUserName"));
-		assertThat(updatedUser.getPassword(), equalTo("NewPass"));
+		categoryById.setName("NewName");
+		categoryById.setDescription("NewDescription");
+		Category updatedCategory = categoryDao.update(categoryById);
+		assertThat(updatedCategory.getName(), equalTo(categoryById.getName()));
+		assertThat(updatedCategory.getDescription(), equalTo(categoryById.getDescription()));
 
 		// Delete
-		applicationUserDao.deleteById(userById.getId());
-		ApplicationUser deletedUser = applicationUserDao.findOne(userById.getId());
-		assertThat(deletedUser, is(nullValue()));
+		categoryDao.deleteById(categoryById.getId());
+		Category deletedCategory = categoryDao.findOne(categoryById.getId());
+		assertThat(deletedCategory, is(nullValue()));
 	}
 
 }
