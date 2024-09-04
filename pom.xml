@@ -19,7 +19,6 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <checkstyle.config.location>${project.parent.basedir}/my_checks.xml</checkstyle.config.location>
 
         <checkstyle.version>10.16.0</checkstyle.version>
         <jacoco.version>0.8.12</jacoco.version>
@@ -52,7 +51,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.5.2.Final</version>
         </dependency>
