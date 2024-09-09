@@ -1,11 +1,13 @@
 package no.satyam.spring.northwind.domain;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import jakarta.persistence.*;
 import no.satyam.spring.northwind.util.ToStringGenerator;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author srt
@@ -16,6 +18,7 @@ public class Product extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Column(unique = true)
+	@NaturalId
 	private String productName;
 
 	private String quantityPerUnit;
@@ -31,11 +34,11 @@ public class Product extends AbstractPersistable<Long> {
 	private Boolean discontinued;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "CATEGORY_ID_FK"))
 	private Category category;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "supplier_id")
+	@JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(name = "SUPPLIER_ID_FK"))
 	private Supplier supplier;
 
 	@OneToMany(mappedBy = "product")
@@ -132,6 +135,23 @@ public class Product extends AbstractPersistable<Long> {
 	@Override
 	public String toString() {
 		return ToStringGenerator.generateInMultiLine(this);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Product product = (Product) o;
+		return Objects.equals(productName, product.productName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), productName);
 	}
 
 }

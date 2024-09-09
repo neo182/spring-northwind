@@ -1,13 +1,14 @@
 package no.satyam.spring.northwind.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author srt
@@ -22,9 +23,9 @@ public class Category extends AbstractPersistable<Long> {
 
 	private String description;
 
-	// mappedBy indicating 'category' owns the relationship.
-	@OneToMany(mappedBy = "category")
-	private Set<Product> products = new HashSet<>();
+	// mappedBy indicating 'Product' (the child side) owns the relationship.
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Product> products = new ArrayList<>();
 
 	public Category() {
 	}
@@ -55,12 +56,22 @@ public class Category extends AbstractPersistable<Long> {
 		this.description = description;
 	}
 
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public void addProduct(Product product) {
+		products.add(product);
+		product.setCategory(this);
+	}
+
+	public void removeProduct(Product product) {
+		products.remove(product);
+		product.setCategory(null);
 	}
 
 	@Override

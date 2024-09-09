@@ -1,12 +1,12 @@
 package no.satyam.spring.northwind.domain;
 
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.util.List;
-
 import jakarta.persistence.*;
 import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.List;
 
 /**
  * @author srt
@@ -37,15 +37,15 @@ public class SalesOrder extends AbstractPersistable<Long> {
 	private String shipCountry;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "CUSTOMER_ID_FK"))
 	private Customer customer;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "employee_id")
+	@JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "EMPLOYEE_ID_FK"))
 	private Employee employee;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "shipper_id")
+	@JoinColumn(name = "shipper_id", foreignKey = @ForeignKey(name = "SHIPPER_ID_FK"))
 	private Shipper shipper;
 
 	@OneToMany(mappedBy = "salesOrder", fetch = FetchType.LAZY)

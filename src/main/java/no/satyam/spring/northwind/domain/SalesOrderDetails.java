@@ -1,11 +1,13 @@
 package no.satyam.spring.northwind.domain;
 
-import java.math.BigDecimal;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.math.BigDecimal;
 
 /**
  * @author srt
@@ -22,11 +24,11 @@ public class SalesOrderDetails extends AbstractPersistable<Long> {
 	private BigDecimal discount;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "salesorder_id")
+	@JoinColumn(name = "salesorder_id", foreignKey = @ForeignKey(name = "SALESORDER_ID_FK"))
 	private SalesOrder salesOrder;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "PRODUCT_ID_FK"))
 	private Product product;
 
 	public SalesOrderDetails() {
