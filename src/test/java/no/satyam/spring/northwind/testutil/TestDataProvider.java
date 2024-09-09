@@ -39,7 +39,7 @@ public class TestDataProvider {
 		product.setDiscontinued(false);
 		product.setReoderLevel(1);
 		product.setQuantityPerUnit("1");
-		product.setUnitPrice(BigDecimal.valueOf(Long.valueOf(faker.commerce().price())));
+		product.setUnitPrice(BigDecimal.valueOf(199));
 		product.setUnitsInStock(new Random().nextInt(10, 100));
 		product.setUnitsInOrder(new Random().nextInt(10, 100));
 		return product;
