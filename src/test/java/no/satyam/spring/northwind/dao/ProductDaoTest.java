@@ -19,35 +19,35 @@ import static org.hamcrest.Matchers.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ExtendWith(SpringExtension.class)
 class ProductDaoTest {
-    @Autowired
-    private ProductDao productDao;
 
-    @Autowired
-    private TestDataProvider dataProvider;
+	@Autowired
+	private ProductDao productDao;
 
-    @Test
-    public void shouldDoCRUDOperationsWithProduct() {
-        Product product = dataProvider.getProduct();
+	@Autowired
+	private TestDataProvider dataProvider;
 
-        // Create
-        Product persistedProduct = productDao.create(product);
-        assertThat(persistedProduct.getId(), is(notNullValue()));
+	@Test
+	public void shouldDoCRUDOperationsWithProduct() {
+		Product product = dataProvider.getProduct();
 
-        // Read
-        Product productById = productDao.findOne(persistedProduct.getId());
-        assertThat(productById, is(notNullValue()));
-        assertThat(productById.getProductName(), equalTo(product.getProductName()));
+		// Create
+		Product persistedProduct = productDao.create(product);
+		assertThat(persistedProduct.getId(), is(notNullValue()));
 
-        // Update
-        productById.setProductName("NewProductName");
-        Product updatedProduct = productDao.update(productById);
-        assertThat(updatedProduct.getProductName(), equalTo(productById.getProductName()));
+		// Read
+		Product productById = productDao.findOne(persistedProduct.getId());
+		assertThat(productById, is(notNullValue()));
+		assertThat(productById.getProductName(), equalTo(product.getProductName()));
 
-        // Delete
-        productDao.deleteById(productById.getId());
-        Product deletedProduct = productDao.findOne(productById.getId());
-        assertThat(deletedProduct, is(nullValue()));
-    }
+		// Update
+		productById.setProductName("NewProductName");
+		Product updatedProduct = productDao.update(productById);
+		assertThat(updatedProduct.getProductName(), equalTo(productById.getProductName()));
 
+		// Delete
+		productDao.deleteById(productById.getId());
+		Product deletedProduct = productDao.findOne(productById.getId());
+		assertThat(deletedProduct, is(nullValue()));
+	}
 
 }

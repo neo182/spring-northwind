@@ -19,32 +19,34 @@ import static org.hamcrest.Matchers.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ExtendWith(SpringExtension.class)
 class EmployeeDaoTest {
-    @Autowired
-    private EmployeeDao employeeDao;
 
-    @Autowired
-    private TestDataProvider dataProvider;
+	@Autowired
+	private EmployeeDao employeeDao;
 
-    @Test
-    public void shouldDoCRUDOperationsWithEmployee() {
-        Employee employee = dataProvider.getEmployee();
-        // Create
-        Employee persistedEmployee = employeeDao.create(employee);
-        assertThat(persistedEmployee.getId(), is(notNullValue()));
+	@Autowired
+	private TestDataProvider dataProvider;
 
-        // Read
-        Employee employeeById = employeeDao.findOne(persistedEmployee.getId());
-        assertThat(employeeById, is(notNullValue()));
-        assertThat(employeeById.getFirstName(), equalTo(employee.getFirstName()));
+	@Test
+	public void shouldDoCRUDOperationsWithEmployee() {
+		Employee employee = dataProvider.getEmployee();
+		// Create
+		Employee persistedEmployee = employeeDao.create(employee);
+		assertThat(persistedEmployee.getId(), is(notNullValue()));
 
-        // Update
-        employeeById.setFirstName("JohnDoe");
-        Employee updatedEmployee = employeeDao.update(employeeById);
-        assertThat(updatedEmployee.getFirstName(), equalTo(employeeById.getFirstName()));
+		// Read
+		Employee employeeById = employeeDao.findOne(persistedEmployee.getId());
+		assertThat(employeeById, is(notNullValue()));
+		assertThat(employeeById.getFirstName(), equalTo(employee.getFirstName()));
 
-        // Delete
-        employeeDao.deleteById(employeeById.getId());
-        Employee deletedEmployee = employeeDao.findOne(employeeById.getId());
-        assertThat(deletedEmployee, is(nullValue()));
-    }
+		// Update
+		employeeById.setFirstName("JohnDoe");
+		Employee updatedEmployee = employeeDao.update(employeeById);
+		assertThat(updatedEmployee.getFirstName(), equalTo(employeeById.getFirstName()));
+
+		// Delete
+		employeeDao.deleteById(employeeById.getId());
+		Employee deletedEmployee = employeeDao.findOne(employeeById.getId());
+		assertThat(deletedEmployee, is(nullValue()));
+	}
+
 }

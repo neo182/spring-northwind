@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class EmployeeDao extends AbstractHibernateDao<Employee> {
-    public EmployeeDao() {
-        setClazz(Employee.class);
-    }
+
+	public EmployeeDao() {
+		setClazz(Employee.class);
+	}
+
 }

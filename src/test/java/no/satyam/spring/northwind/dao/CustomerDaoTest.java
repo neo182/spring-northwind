@@ -19,34 +19,36 @@ import static org.hamcrest.Matchers.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ExtendWith(SpringExtension.class)
 class CustomerDaoTest {
-    @Autowired
-    private CustomerDao customerDao;
 
-    @Autowired
-    private TestDataProvider dataProvider;
+	@Autowired
+	private CustomerDao customerDao;
 
-    @Test
-    public void shouldDoCRUDOperationsWithCustomer() {
-        Customer customer = dataProvider.getCustomer();
-        // Create
-        Customer persistedCustomer = customerDao.create(customer);
-        assertThat(persistedCustomer.getId(), is(notNullValue()));
+	@Autowired
+	private TestDataProvider dataProvider;
 
-        // Read
-        Customer customerById = customerDao.findOne(persistedCustomer.getId());
-        assertThat(customerById, is(notNullValue()));
-        assertThat(customerById.getCompanyName(), equalTo(customer.getCompanyName()));
+	@Test
+	public void shouldDoCRUDOperationsWithCustomer() {
+		Customer customer = dataProvider.getCustomer();
+		// Create
+		Customer persistedCustomer = customerDao.create(customer);
+		assertThat(persistedCustomer.getId(), is(notNullValue()));
 
-        // Update
-        customerById.setCompanyName("Zion & Co.");
-        customerById.setCountry("Norway");
-        Customer updatedCustomer = customerDao.update(customerById);
-        assertThat(updatedCustomer.getCompanyName(), equalTo(customerById.getCompanyName()));
-        assertThat(updatedCustomer.getCountry(), equalTo(customerById.getCountry()));
+		// Read
+		Customer customerById = customerDao.findOne(persistedCustomer.getId());
+		assertThat(customerById, is(notNullValue()));
+		assertThat(customerById.getCompanyName(), equalTo(customer.getCompanyName()));
 
-        // Delete
-        customerDao.deleteById(customerById.getId());
-        Customer deletedCustomer = customerDao.findOne(customerById.getId());
-        assertThat(deletedCustomer, is(nullValue()));
-    }
+		// Update
+		customerById.setCompanyName("Zion & Co.");
+		customerById.setCountry("Norway");
+		Customer updatedCustomer = customerDao.update(customerById);
+		assertThat(updatedCustomer.getCompanyName(), equalTo(customerById.getCompanyName()));
+		assertThat(updatedCustomer.getCountry(), equalTo(customerById.getCountry()));
+
+		// Delete
+		customerDao.deleteById(customerById.getId());
+		Customer deletedCustomer = customerDao.findOne(customerById.getId());
+		assertThat(deletedCustomer, is(nullValue()));
+	}
+
 }

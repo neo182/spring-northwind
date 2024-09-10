@@ -19,32 +19,34 @@ import static org.hamcrest.Matchers.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ExtendWith(SpringExtension.class)
 class ShipperDaoTest {
-    @Autowired
-    private ShipperDao shipperDao;
 
-    @Autowired
-    private TestDataProvider dataProvider;
+	@Autowired
+	private ShipperDao shipperDao;
 
-    @Test
-    public void shouldDoCRUDOperationsWithShipper() {
-        Shipper shipper = dataProvider.getShipper();
-        // Create
-        Shipper persistedShipper = shipperDao.create(shipper);
-        assertThat(persistedShipper.getId(), is(notNullValue()));
+	@Autowired
+	private TestDataProvider dataProvider;
 
-        // Read
-        Shipper shipperById = shipperDao.findOne(persistedShipper.getId());
-        assertThat(shipperById, is(notNullValue()));
-        assertThat(shipperById.getCompanyName(), equalTo(shipper.getCompanyName()));
+	@Test
+	public void shouldDoCRUDOperationsWithShipper() {
+		Shipper shipper = dataProvider.getShipper();
+		// Create
+		Shipper persistedShipper = shipperDao.create(shipper);
+		assertThat(persistedShipper.getId(), is(notNullValue()));
 
-        // Update
-        shipperById.setCompanyName("Zion Co.");
-        Shipper updatedShipper = shipperDao.update(shipperById);
-        assertThat(updatedShipper.getCompanyName(), equalTo(shipperById.getCompanyName()));
+		// Read
+		Shipper shipperById = shipperDao.findOne(persistedShipper.getId());
+		assertThat(shipperById, is(notNullValue()));
+		assertThat(shipperById.getCompanyName(), equalTo(shipper.getCompanyName()));
 
-        // Delete
-        shipperDao.deleteById(shipperById.getId());
-        Shipper deletedShipper = shipperDao.findOne(shipperById.getId());
-        assertThat(deletedShipper, is(nullValue()));
-    }
+		// Update
+		shipperById.setCompanyName("Zion Co.");
+		Shipper updatedShipper = shipperDao.update(shipperById);
+		assertThat(updatedShipper.getCompanyName(), equalTo(shipperById.getCompanyName()));
+
+		// Delete
+		shipperDao.deleteById(shipperById.getId());
+		Shipper deletedShipper = shipperDao.findOne(shipperById.getId());
+		assertThat(deletedShipper, is(nullValue()));
+	}
+
 }
