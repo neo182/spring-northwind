@@ -1,12 +1,14 @@
 package no.satyam.spring.northwind.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author srt
@@ -40,7 +42,7 @@ public class Supplier extends AbstractPersistable<Long> {
 	private String homepage;
 
 	@OneToMany(mappedBy = "supplier")
-	private Set<Product> products = new HashSet<>();
+	private List<Product> products = new ArrayList<>();
 
 	public Supplier() {
 	}
@@ -62,7 +64,7 @@ public class Supplier extends AbstractPersistable<Long> {
 
 	@Override
 	public void setId(Long id) {
-		super.setId(id); // To change body of generated methods, choose Tools | Templates.
+		super.setId(id);
 	}
 
 	public String getCompanyName() {
@@ -153,12 +155,29 @@ public class Supplier extends AbstractPersistable<Long> {
 		this.homepage = homepage;
 	}
 
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Supplier supplier = (Supplier) o;
+		return Objects.equals(companyName, supplier.companyName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), companyName);
 	}
 
 	@Override

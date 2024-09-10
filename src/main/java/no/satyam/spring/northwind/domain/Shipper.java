@@ -1,13 +1,15 @@
 package no.satyam.spring.northwind.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author srt
@@ -23,7 +25,7 @@ public class Shipper extends AbstractPersistable<Long> {
 	private String phone;
 
 	@OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)
-	private Set<SalesOrder> salesOrders = new HashSet<>();
+	private List<SalesOrder> salesOrders = new ArrayList<>();
 
 	public Shipper() {
 	}
@@ -54,12 +56,29 @@ public class Shipper extends AbstractPersistable<Long> {
 		this.phone = phone;
 	}
 
-	public Set<SalesOrder> getSalesOrders() {
+	public List<SalesOrder> getSalesOrders() {
 		return salesOrders;
 	}
 
-	public void setSalesOrders(Set<SalesOrder> salesOrders) {
+	public void setSalesOrders(List<SalesOrder> salesOrders) {
 		this.salesOrders = salesOrders;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Shipper shipper = (Shipper) o;
+		return Objects.equals(companyName, shipper.companyName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), companyName);
 	}
 
 	@Override

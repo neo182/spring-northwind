@@ -1,12 +1,14 @@
 package no.satyam.spring.northwind.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author srt
@@ -38,9 +40,9 @@ public class Customer extends AbstractPersistable<Long> {
 
 	private String fax;
 
-	// customer is the owning side
+	// SalesOrder is the owning side
 	@OneToMany(mappedBy = "customer")
-	private Set<SalesOrder> salesOrders = new HashSet<>();
+	private List<SalesOrder> salesOrders = new ArrayList<>();
 
 	public Customer() {
 	}
@@ -144,12 +146,29 @@ public class Customer extends AbstractPersistable<Long> {
 		this.fax = fax;
 	}
 
-	public Set<SalesOrder> getSalesOrders() {
+	public List<SalesOrder> getSalesOrders() {
 		return salesOrders;
 	}
 
-	public void setSalesOrders(Set<SalesOrder> salesOrders) {
+	public void setSalesOrders(List<SalesOrder> salesOrders) {
 		this.salesOrders = salesOrders;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Customer customer = (Customer) o;
+		return Objects.equals(companyName, customer.companyName) && Objects.equals(contactName, customer.contactName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), companyName, contactName);
 	}
 
 	@Override

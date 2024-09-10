@@ -1,13 +1,16 @@
 package no.satyam.spring.northwind.domain;
 
-import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author srt
@@ -49,8 +52,8 @@ public class Employee extends AbstractPersistable<Long> {
 
 	private String reportsTo;
 
-	@OneToMany(mappedBy = "employee")
-	private Set<SalesOrder> salesOrders = new HashSet<>();
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	private List<SalesOrder> salesOrders = new ArrayList<>();
 
 	public Employee() {
 	}
@@ -200,12 +203,30 @@ public class Employee extends AbstractPersistable<Long> {
 		this.reportsTo = reportsTo;
 	}
 
-	public Set<SalesOrder> getSalesOrders() {
+	public List<SalesOrder> getSalesOrders() {
 		return salesOrders;
 	}
 
-	public void setSalesOrders(Set<SalesOrder> salesOrders) {
+	public void setSalesOrders(List<SalesOrder> salesOrders) {
 		this.salesOrders = salesOrders;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Employee employee = (Employee) o;
+		return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName)
+				&& Objects.equals(birthDate, employee.birthDate);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), firstName, lastName, birthDate);
 	}
 
 	@Override
