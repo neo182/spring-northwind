@@ -101,7 +101,7 @@ public class TestDataProvider {
 		return employee;
 	}
 
-	public Orders getSalesOrder(Customer customer, Employee employee, Shipper shipper) {
+	public Orders getOrders(Customer customer, Employee employee, Shipper shipper) {
 		Orders orders = new Orders();
 		orders.setOrderDate(Date.valueOf(LocalDate.of(2020, 1, 1)));
 		orders.setRequiredDate(Date.valueOf(LocalDate.of(2020, 1, 2)));
@@ -117,6 +117,15 @@ public class TestDataProvider {
 		orders.setEmployee(employee);
 		orders.setShipper(shipper);
 		return orders;
+	}
+
+	public OrderDetails getOrderDetails(Product product) {
+		OrderDetails orderDetails = new OrderDetails();
+		orderDetails.setDiscount(BigDecimal.ZERO);
+		orderDetails.setUnitPrice(BigDecimal.TEN);
+		orderDetails.setQuantity(10);
+		orderDetails.setProduct(product);
+		return orderDetails;
 	}
 
 }
