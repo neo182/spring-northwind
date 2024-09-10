@@ -54,14 +54,14 @@ public class Orders extends AbstractPersistable<Long> {
 	public Orders() {
 	}
 
-	public void addSalesOrderDetails(OrderDetails orderDetails) {
+	public void addOrderDetails(OrderDetails orderDetails) {
 		orderDetailsList.add(orderDetails);
-		orderDetails.setSalesOrder(this);
+		orderDetails.setOrders(this);
 	}
 
-	public void removeSalesOrderDetails(OrderDetails orderDetails) {
+	public void removeOrderDetails(OrderDetails orderDetails) {
 		orderDetailsList.remove(orderDetails);
-		orderDetails.setSalesOrder(null);
+		orderDetails.setOrders(null);
 	}
 
 	@Override

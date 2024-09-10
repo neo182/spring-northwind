@@ -203,7 +203,7 @@ public class Employee extends AbstractPersistable<Long> {
 		this.reportsTo = reportsTo;
 	}
 
-	public List<Orders> getSalesOrders() {
+	public List<Orders> getOrders() {
 		return ordersList;
 	}
 

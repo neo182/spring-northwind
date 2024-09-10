@@ -146,7 +146,7 @@ public class Customer extends AbstractPersistable<Long> {
 		this.fax = fax;
 	}
 
-	public List<Orders> getSalesOrders() {
+	public List<Orders> getOrders() {
 		return ordersList;
 	}
 

@@ -58,11 +58,11 @@ public class OrderDetails extends AbstractPersistable<Long> {
 		this.discount = discount;
 	}
 
-	public Orders getSalesOrder() {
+	public Orders getOrders() {
 		return orders;
 	}
 
-	public void setSalesOrder(Orders orders) {
+	public void setOrders(Orders orders) {
 		this.orders = orders;
 	}
 

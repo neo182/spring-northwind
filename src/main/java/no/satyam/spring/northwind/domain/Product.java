@@ -124,11 +124,11 @@ public class Product extends AbstractPersistable<Long> {
 		this.supplier = supplier;
 	}
 
-	public List<OrderDetails> getSalesOrderDetails() {
+	public List<OrderDetails> getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setSalesOrderDetails(List<OrderDetails> orderDetails) {
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 

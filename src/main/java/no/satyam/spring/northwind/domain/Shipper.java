@@ -56,7 +56,7 @@ public class Shipper extends AbstractPersistable<Long> {
 		this.phone = phone;
 	}
 
-	public List<Orders> getSalesOrders() {
+	public List<Orders> getOrders() {
 		return ordersList;
 	}
 
