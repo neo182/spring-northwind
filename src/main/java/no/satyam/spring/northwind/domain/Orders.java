@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class Orders extends AbstractPersistable<Long> {
 	private Shipper shipper;
 
 	@OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<OrderDetails> orderDetailsList;
+	private List<OrderDetails> orderDetailsList = new ArrayList<>();
 
 	public Orders() {
 	}
