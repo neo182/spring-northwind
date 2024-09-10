@@ -163,6 +163,16 @@ public class Supplier extends AbstractPersistable<Long> {
 		this.products = products;
 	}
 
+	public void associateProduct(Product product) {
+		products.add(product);
+		product.setSupplier(this);
+	}
+
+	public void dissociateProduct(Product product) {
+		products.remove(product);
+		product.setSupplier(null);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
