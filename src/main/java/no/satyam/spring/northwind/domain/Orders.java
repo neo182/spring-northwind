@@ -12,7 +12,7 @@ import java.util.List;
  * @author srt
  */
 @Entity
-public class SalesOrder extends AbstractPersistable<Long> {
+public class Orders extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -48,10 +48,20 @@ public class SalesOrder extends AbstractPersistable<Long> {
 	@JoinColumn(name = "shipper_id", foreignKey = @ForeignKey(name = "SHIPPER_ID_FK"))
 	private Shipper shipper;
 
-	@OneToMany(mappedBy = "salesOrder", fetch = FetchType.LAZY)
-	private List<SalesOrderDetails> salesOrderDetails;
+	@OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, orphanRemoval = true)
+	private List<OrderDetails> orderDetailsList;
 
-	public SalesOrder() {
+	public Orders() {
+	}
+
+	public void addSalesOrderDetails(OrderDetails orderDetails) {
+		orderDetailsList.add(orderDetails);
+		orderDetails.setSalesOrder(this);
+	}
+
+	public void removeSalesOrderDetails(OrderDetails orderDetails) {
+		orderDetailsList.remove(orderDetails);
+		orderDetails.setSalesOrder(null);
 	}
 
 	@Override
@@ -163,12 +173,12 @@ public class SalesOrder extends AbstractPersistable<Long> {
 		this.shipper = shipper;
 	}
 
-	public List<SalesOrderDetails> getSalesOrderDetails() {
-		return salesOrderDetails;
+	public List<OrderDetails> getSalesOrderDetailsList() {
+		return orderDetailsList;
 	}
 
-	public void setSalesOrderDetails(List<SalesOrderDetails> salesOrderDetails) {
-		this.salesOrderDetails = salesOrderDetails;
+	public void setSalesOrderDetailsList(List<OrderDetails> orderDetailsList) {
+		this.orderDetailsList = orderDetailsList;
 	}
 
 	@Override

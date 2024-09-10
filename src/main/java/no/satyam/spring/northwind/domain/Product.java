@@ -42,7 +42,7 @@ public class Product extends AbstractPersistable<Long> {
 	private Supplier supplier;
 
 	@OneToMany(mappedBy = "product")
-	private List<SalesOrderDetails> salesOrderDetails;
+	private List<OrderDetails> orderDetails;
 
 	public Product() {
 	}
@@ -124,12 +124,12 @@ public class Product extends AbstractPersistable<Long> {
 		this.supplier = supplier;
 	}
 
-	public List<SalesOrderDetails> getSalesOrderDetails() {
-		return salesOrderDetails;
+	public List<OrderDetails> getSalesOrderDetails() {
+		return orderDetails;
 	}
 
-	public void setSalesOrderDetails(List<SalesOrderDetails> salesOrderDetails) {
-		this.salesOrderDetails = salesOrderDetails;
+	public void setSalesOrderDetails(List<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 
 	@Override

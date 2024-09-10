@@ -101,22 +101,22 @@ public class TestDataProvider {
 		return employee;
 	}
 
-	public SalesOrder getSalesOrder(Customer customer, Employee employee, Shipper shipper) {
-		SalesOrder salesOrder = new SalesOrder();
-		salesOrder.setOrderDate(Date.valueOf(LocalDate.of(2020, 1, 1)));
-		salesOrder.setRequiredDate(Date.valueOf(LocalDate.of(2020, 1, 2)));
-		salesOrder.setShippedDate(Date.valueOf(LocalDate.of(2020, 1, 3)));
-		salesOrder.setFreight(BigDecimal.valueOf(new Random().nextDouble(1000, 2000)));
-		salesOrder.setShipName(faker.gameOfThrones().character());
-		salesOrder.setShipAddress(faker.address().fullAddress());
-		salesOrder.setShipCity(faker.address().city());
-		salesOrder.setShipRegion(faker.address().city());
-		salesOrder.setShipPostalCode(faker.address().zipCode());
-		salesOrder.setShipCountry(faker.address().country());
-		salesOrder.setCustomer(customer);
-		salesOrder.setEmployee(employee);
-		salesOrder.setShipper(shipper);
-		return salesOrder;
+	public Orders getSalesOrder(Customer customer, Employee employee, Shipper shipper) {
+		Orders orders = new Orders();
+		orders.setOrderDate(Date.valueOf(LocalDate.of(2020, 1, 1)));
+		orders.setRequiredDate(Date.valueOf(LocalDate.of(2020, 1, 2)));
+		orders.setShippedDate(Date.valueOf(LocalDate.of(2020, 1, 3)));
+		orders.setFreight(BigDecimal.valueOf(new Random().nextDouble(1000, 2000)));
+		orders.setShipName(faker.gameOfThrones().character());
+		orders.setShipAddress(faker.address().fullAddress());
+		orders.setShipCity(faker.address().city());
+		orders.setShipRegion(faker.address().city());
+		orders.setShipPostalCode(faker.address().zipCode());
+		orders.setShipCountry(faker.address().country());
+		orders.setCustomer(customer);
+		orders.setEmployee(employee);
+		orders.setShipper(shipper);
+		return orders;
 	}
 
 }

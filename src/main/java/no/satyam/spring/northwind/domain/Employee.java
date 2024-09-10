@@ -53,7 +53,7 @@ public class Employee extends AbstractPersistable<Long> {
 	private String reportsTo;
 
 	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-	private List<SalesOrder> salesOrders = new ArrayList<>();
+	private List<Orders> ordersList = new ArrayList<>();
 
 	public Employee() {
 	}
@@ -203,12 +203,12 @@ public class Employee extends AbstractPersistable<Long> {
 		this.reportsTo = reportsTo;
 	}
 
-	public List<SalesOrder> getSalesOrders() {
-		return salesOrders;
+	public List<Orders> getSalesOrders() {
+		return ordersList;
 	}
 
-	public void setSalesOrders(List<SalesOrder> salesOrders) {
-		this.salesOrders = salesOrders;
+	public void setSalesOrders(List<Orders> orders) {
+		this.ordersList = orders;
 	}
 
 	@Override

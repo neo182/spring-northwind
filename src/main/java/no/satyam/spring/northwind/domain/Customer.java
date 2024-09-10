@@ -40,9 +40,9 @@ public class Customer extends AbstractPersistable<Long> {
 
 	private String fax;
 
-	// SalesOrder is the owning side
+	// Orders is the owning side
 	@OneToMany(mappedBy = "customer")
-	private List<SalesOrder> salesOrders = new ArrayList<>();
+	private List<Orders> ordersList = new ArrayList<>();
 
 	public Customer() {
 	}
@@ -63,7 +63,7 @@ public class Customer extends AbstractPersistable<Long> {
 
 	@Override
 	public void setId(Long id) {
-		super.setId(id); // To change body of generated methods, choose Tools | Templates.
+		super.setId(id);
 	}
 
 	public String getCompanyName() {
@@ -146,12 +146,12 @@ public class Customer extends AbstractPersistable<Long> {
 		this.fax = fax;
 	}
 
-	public List<SalesOrder> getSalesOrders() {
-		return salesOrders;
+	public List<Orders> getSalesOrders() {
+		return ordersList;
 	}
 
-	public void setSalesOrders(List<SalesOrder> salesOrders) {
-		this.salesOrders = salesOrders;
+	public void setSalesOrders(List<Orders> orders) {
+		this.ordersList = orders;
 	}
 
 	@Override

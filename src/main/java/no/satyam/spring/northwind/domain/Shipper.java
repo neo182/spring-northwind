@@ -25,7 +25,7 @@ public class Shipper extends AbstractPersistable<Long> {
 	private String phone;
 
 	@OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)
-	private List<SalesOrder> salesOrders = new ArrayList<>();
+	private List<Orders> ordersList = new ArrayList<>();
 
 	public Shipper() {
 	}
@@ -56,12 +56,12 @@ public class Shipper extends AbstractPersistable<Long> {
 		this.phone = phone;
 	}
 
-	public List<SalesOrder> getSalesOrders() {
-		return salesOrders;
+	public List<Orders> getSalesOrders() {
+		return ordersList;
 	}
 
-	public void setSalesOrders(List<SalesOrder> salesOrders) {
-		this.salesOrders = salesOrders;
+	public void setSalesOrders(List<Orders> orders) {
+		this.ordersList = orders;
 	}
 
 	@Override

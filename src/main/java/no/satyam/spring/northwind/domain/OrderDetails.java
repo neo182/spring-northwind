@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @author srt
  */
 @Entity
-public class SalesOrderDetails extends AbstractPersistable<Long> {
+public class OrderDetails extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,14 +24,14 @@ public class SalesOrderDetails extends AbstractPersistable<Long> {
 	private BigDecimal discount;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "salesorder_id", foreignKey = @ForeignKey(name = "SALESORDER_ID_FK"))
-	private SalesOrder salesOrder;
+	@JoinColumn(name = "orders_id", foreignKey = @ForeignKey(name = "ORDERS_ID_FK"))
+	private Orders orders;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "PRODUCT_ID_FK"))
 	private Product product;
 
-	public SalesOrderDetails() {
+	public OrderDetails() {
 	}
 
 	public BigDecimal getUnitPrice() {
@@ -58,12 +58,12 @@ public class SalesOrderDetails extends AbstractPersistable<Long> {
 		this.discount = discount;
 	}
 
-	public SalesOrder getSalesOrder() {
-		return salesOrder;
+	public Orders getSalesOrder() {
+		return orders;
 	}
 
-	public void setSalesOrder(SalesOrder salesOrder) {
-		this.salesOrder = salesOrder;
+	public void setSalesOrder(Orders orders) {
+		this.orders = orders;
 	}
 
 	public Product getProduct() {
