@@ -75,4 +75,20 @@ class CategoryDaoTest {
 		assertThat(products.size(), is(2));
 	}
 
+	@Test
+	public void shouldDeleteExistingProductsFromACategory() {
+		Category category = dataProvider.getCategory();
+		Product product = dataProvider.getProduct();
+
+		// Add a new product in a new category
+		categoryDao.addProductsInCategory(category, product);
+
+		// Remove the product from the category
+		categoryDao.removeProductsFromCategory(category, product);
+
+		Category categoryWithOneProduct = categoryDao.findOne(category.getId());
+		List<Product> products = categoryWithOneProduct.getProducts();
+		assertThat(products.size(), is(0));
+	}
+
 }

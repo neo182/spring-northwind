@@ -12,11 +12,27 @@ public class CategoryDao extends AbstractHibernateDao<Category> {
 	}
 
 	public void addProductsInCategory(Category category, Product... products) {
-		for (Product product : products) {
-			category.getProducts().add(product);
+		if (products.length == 0) {
+			return;
 		}
 
-		sessionFactory.getCurrentSession().persist(category);
+		for (Product product : products) {
+			category.addProduct(product);
+		}
+
+		super.getCurrentSession().persist(category);
+	}
+
+	public void removeProductsFromCategory(Category category, Product... products) {
+		if (products.length == 0) {
+			return;
+		}
+
+		for (Product product : products) {
+			category.removeProduct(product);
+		}
+
+		super.getCurrentSession().persist(category);
 	}
 
 }
