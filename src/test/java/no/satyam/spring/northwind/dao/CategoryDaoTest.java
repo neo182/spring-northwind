@@ -30,7 +30,7 @@ class CategoryDaoTest {
 	private TestDataProvider dataProvider;
 
 	@Test
-	public void shouldDoCRUDOperationsWithApplicationUser() {
+	public void shouldDoCRUDOperationsWithCategory() {
 		Category category = dataProvider.getCategory();
 		// Create
 		Category persistedCategory = categoryDao.create(category);
