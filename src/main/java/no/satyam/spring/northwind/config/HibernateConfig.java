@@ -1,6 +1,7 @@
 package no.satyam.spring.northwind.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -47,9 +48,9 @@ public class HibernateConfig {
 	}
 
 	@Bean
-	public PlatformTransactionManager hibernateTransactionManager() {
+	public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-		transactionManager.setSessionFactory(sessionFactory().getObject());
+		transactionManager.setSessionFactory(sessionFactory);
 		return transactionManager;
 	}
 
