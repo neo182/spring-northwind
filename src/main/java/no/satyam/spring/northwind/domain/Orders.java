@@ -174,7 +174,7 @@ public class Orders extends AbstractPersistable<Long> {
 		this.shipper = shipper;
 	}
 
-	public List<OrderDetails> getSalesOrderDetailsList() {
+	public List<OrderDetails> getOrderDetailsList() {
 		return orderDetailsList;
 	}
 
