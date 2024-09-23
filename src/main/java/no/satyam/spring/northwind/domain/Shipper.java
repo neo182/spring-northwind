@@ -1,70 +1,89 @@
 package no.satyam.spring.northwind.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import no.satyam.spring.northwind.adapter.ToStringGenerator;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 /**
- *
  * @author srt
  */
 @Entity
 public class Shipper extends AbstractPersistable<Long> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Column(unique = true)
-    private String companyName;
-    private String phone;
+	@Column(unique = true)
+	private String companyName;
 
-    @OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)
-    private Set<SalesOrder> salesOrders = new HashSet<>();
+	private String phone;
 
-    public Shipper() {
-    }
+	@OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)
+	private List<Orders> ordersList = new ArrayList<>();
 
-    public Shipper(String companyName, String phone) {
-        this.companyName = companyName;
-        this.phone = phone;
-    }
+	public Shipper() {
+	}
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
+	public Shipper(String companyName, String phone) {
+		this.companyName = companyName;
+		this.phone = phone;
+	}
 
-    public String getCompanyName() {
-        return companyName;
-    }
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+	public String getCompanyName() {
+		return companyName;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public Set<SalesOrder> getSalesOrders() {
-        return salesOrders;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public void setSalesOrders(Set<SalesOrder> salesOrders) {
-        this.salesOrders = salesOrders;
-    }
+	public List<Orders> getOrders() {
+		return ordersList;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringGenerator.generateInMultiLine(this);
-    }
+	public void setSalesOrders(List<Orders> orders) {
+		this.ordersList = orders;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Shipper shipper = (Shipper) o;
+		return Objects.equals(companyName, shipper.companyName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), companyName);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringGenerator.generateInMultiLine(this);
+	}
 
 }

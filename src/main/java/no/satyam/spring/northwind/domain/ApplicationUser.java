@@ -1,55 +1,55 @@
 package no.satyam.spring.northwind.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import no.satyam.spring.northwind.adapter.ToStringGenerator;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- *
  * @author srt
  */
 @Entity
 public class ApplicationUser extends AbstractPersistable<Long> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Column(unique = true)
-    private String userName;
-    private String password;
+	@Column(unique = true)
+	private String userName;
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
+	private String password;
 
-    public String getUserName() {
-        return userName;
-    }
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public ApplicationUser() {
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public ApplicationUser(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
+	public ApplicationUser() {
+	}
 
-    @Override
-    public String toString() {
-        return ToStringGenerator.generateInMultiLine(this);
-    }
+	public ApplicationUser(String userName, String password) {
+		this.userName = userName;
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringGenerator.generateInMultiLine(this);
+	}
 
 }

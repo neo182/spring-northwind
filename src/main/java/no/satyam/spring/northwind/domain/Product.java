@@ -1,132 +1,157 @@
 package no.satyam.spring.northwind.domain;
 
-import java.math.BigDecimal;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import no.satyam.spring.northwind.adapter.ToStringGenerator;
+import jakarta.persistence.*;
+import no.satyam.spring.northwind.util.ToStringGenerator;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
+
 /**
- *
  * @author srt
  */
 @Entity
 public class Product extends AbstractPersistable<Long> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Column(unique = true)
-    private String productName;
-    private String quantityPerUnit;
-    private BigDecimal unitPrice;
-    private Integer unitsInStock;
-    private Integer unitsInOrder;
-    private Integer reoderLevel;
-    private Boolean discontinued;
+	@Column(unique = true)
+	@NaturalId
+	private String productName;
 
-    @ManyToOne(optional = false)
-    private Category category;
+	private String quantityPerUnit;
 
-    @ManyToOne(optional = false)
-    private Supplier supplier;
+	private BigDecimal unitPrice;
 
-    @OneToMany(mappedBy = "product")
-    private List<SalesOrderDetails> salesOrderDetails;
+	private Integer unitsInStock;
 
-    public Product() {
-    }
+	private Integer unitsInOrder;
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id); //To change body of generated methods, choose Tools | Templates.
-    }
+	private Integer reoderLevel;
 
-    public String getProductName() {
-        return productName;
-    }
+	private Boolean discontinued;
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "CATEGORY_ID_FK"))
+	private Category category;
 
-    public String getQuantityPerUnit() {
-        return quantityPerUnit;
-    }
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(name = "SUPPLIER_ID_FK"))
+	private Supplier supplier;
 
-    public void setQuantityPerUnit(String quantityPerUnit) {
-        this.quantityPerUnit = quantityPerUnit;
-    }
+	@OneToMany(mappedBy = "product")
+	private List<OrderDetails> orderDetails;
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
+	public Product() {
+	}
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
+	@Override
+	public void setId(Long id) {
+		super.setId(id); // To change body of generated methods, choose Tools | Templates.
+	}
 
-    public Integer getUnitsInStock() {
-        return unitsInStock;
-    }
+	public String getProductName() {
+		return productName;
+	}
 
-    public void setUnitsInStock(Integer unitsInStock) {
-        this.unitsInStock = unitsInStock;
-    }
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
-    public Integer getUnitsInOrder() {
-        return unitsInOrder;
-    }
+	public String getQuantityPerUnit() {
+		return quantityPerUnit;
+	}
 
-    public void setUnitsInOrder(Integer unitsInOrder) {
-        this.unitsInOrder = unitsInOrder;
-    }
+	public void setQuantityPerUnit(String quantityPerUnit) {
+		this.quantityPerUnit = quantityPerUnit;
+	}
 
-    public Integer getReoderLevel() {
-        return reoderLevel;
-    }
+	public BigDecimal getUnitPrice() {
+		return unitPrice;
+	}
 
-    public void setReoderLevel(Integer reoderLevel) {
-        this.reoderLevel = reoderLevel;
-    }
+	public void setUnitPrice(BigDecimal unitPrice) {
+		this.unitPrice = unitPrice;
+	}
 
-    public Boolean getDiscontinued() {
-        return discontinued;
-    }
+	public Integer getUnitsInStock() {
+		return unitsInStock;
+	}
 
-    public void setDiscontinued(Boolean discontinued) {
-        this.discontinued = discontinued;
-    }
+	public void setUnitsInStock(Integer unitsInStock) {
+		this.unitsInStock = unitsInStock;
+	}
 
-    public Category getCategory() {
-        return category;
-    }
+	public Integer getUnitsInOrder() {
+		return unitsInOrder;
+	}
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+	public void setUnitsInOrder(Integer unitsInOrder) {
+		this.unitsInOrder = unitsInOrder;
+	}
 
-    public Supplier getSupplier() {
-        return supplier;
-    }
+	public Integer getReoderLevel() {
+		return reoderLevel;
+	}
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
+	public void setReoderLevel(Integer reoderLevel) {
+		this.reoderLevel = reoderLevel;
+	}
 
-    public List<SalesOrderDetails> getSalesOrderDetails() {
-        return salesOrderDetails;
-    }
+	public Boolean getDiscontinued() {
+		return discontinued;
+	}
 
-    public void setSalesOrderDetails(List<SalesOrderDetails> salesOrderDetails) {
-        this.salesOrderDetails = salesOrderDetails;
-    }
+	public void setDiscontinued(Boolean discontinued) {
+		this.discontinued = discontinued;
+	}
 
-     @Override
-    public String toString() {
-        return ToStringGenerator.generateInMultiLine(this);
-    }
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public List<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringGenerator.generateInMultiLine(this);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Product product = (Product) o;
+		return Objects.equals(productName, product.productName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), productName);
+	}
 
 }

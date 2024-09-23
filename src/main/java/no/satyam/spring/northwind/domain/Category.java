@@ -1,69 +1,82 @@
 package no.satyam.spring.northwind.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import no.satyam.spring.northwind.adapter.ToStringGenerator;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author srt
  */
 @Entity
 public class Category extends AbstractPersistable<Long> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Column(unique = true)
-    private String name;
-    private String description;
+	@Column(unique = true)
+	private String name;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Product> products = new HashSet<>();
+	private String description;
 
-    public Category() {
-    }
+	// mappedBy indicating 'Product' (the child side) owns the relationship.
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Product> products = new ArrayList<>();
 
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
+	public Category() {
+	}
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
+	public Category(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
 
-    public String getName() {
-        return name;
-    }
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public Set<Product> getProducts() {
-        return products;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
+	public List<Product> getProducts() {
+		return products;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringGenerator.generateInMultiLine(this);
-    }
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public void addProduct(Product product) {
+		products.add(product);
+		product.setCategory(this);
+	}
+
+	public void removeProduct(Product product) {
+		products.remove(product);
+		product.setCategory(null);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringGenerator.generateInMultiLine(this);
+	}
 
 }

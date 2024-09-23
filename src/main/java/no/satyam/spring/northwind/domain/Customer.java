@@ -1,150 +1,179 @@
 package no.satyam.spring.northwind.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import no.satyam.spring.northwind.adapter.ToStringGenerator;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import no.satyam.spring.northwind.util.ToStringGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 /**
- *
  * @author srt
  */
 @Entity
 public class Customer extends AbstractPersistable<Long> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Column(nullable = false)
-    private String companyName;
-    @Column(nullable = false)
-    private String contactName;
-    private String contactTitle;
-    private String address;
-    private String city;
-    private String region;
-    private String postalCode;
-    private String country;
-    private String phone;
-    private String fax;
+	@Column(nullable = false)
+	private String companyName;
 
-    @OneToMany(mappedBy = "customer")
-    private Set<SalesOrder> salesOrders = new HashSet<>();
+	@Column(nullable = false)
+	private String contactName;
 
-    public Customer() {
-    }
+	private String contactTitle;
 
-    public Customer(String companyName, String contactName, String contactTitle, String address, String city, String region, String postalCode, String country, String phone, String fax) {
-        this.companyName = companyName;
-        this.contactName = contactName;
-        this.contactTitle = contactTitle;
-        this.address = address;
-        this.city = city;
-        this.region = region;
-        this.postalCode = postalCode;
-        this.country = country;
-        this.phone = phone;
-        this.fax = fax;
-    }
+	private String address;
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id); //To change body of generated methods, choose Tools | Templates.
-    }
+	private String city;
 
-    public String getCompanyName() {
-        return companyName;
-    }
+	private String region;
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+	private String postalCode;
 
-    public String getContactName() {
-        return contactName;
-    }
+	private String country;
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
+	private String phone;
 
-    public String getContactTitle() {
-        return contactTitle;
-    }
+	private String fax;
 
-    public void setContactTitle(String contactTitle) {
-        this.contactTitle = contactTitle;
-    }
+	// Orders is the owning side
+	@OneToMany(mappedBy = "customer")
+	private List<Orders> ordersList = new ArrayList<>();
 
-    public String getAddress() {
-        return address;
-    }
+	public Customer() {
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public Customer(String companyName, String contactName, String contactTitle, String address, String city,
+			String region, String postalCode, String country, String phone, String fax) {
+		this.companyName = companyName;
+		this.contactName = contactName;
+		this.contactTitle = contactTitle;
+		this.address = address;
+		this.city = city;
+		this.region = region;
+		this.postalCode = postalCode;
+		this.country = country;
+		this.phone = phone;
+		this.fax = fax;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public String getCompanyName() {
+		return companyName;
+	}
 
-    public String getRegion() {
-        return region;
-    }
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
+	public String getContactName() {
+		return contactName;
+	}
 
-    public String getPostalCode() {
-        return postalCode;
-    }
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
+	public String getContactTitle() {
+		return contactTitle;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public void setContactTitle(String contactTitle) {
+		this.contactTitle = contactTitle;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public String getFax() {
-        return fax;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public void setFax(String fax) {
-        this.fax = fax;
-    }
+	public String getRegion() {
+		return region;
+	}
 
-    public Set<SalesOrder> getSalesOrders() {
-        return salesOrders;
-    }
+	public void setRegion(String region) {
+		this.region = region;
+	}
 
-    public void setSalesOrders(Set<SalesOrder> salesOrders) {
-        this.salesOrders = salesOrders;
-    }
+	public String getPostalCode() {
+		return postalCode;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringGenerator.generateInMultiLine(this);
-    }
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public List<Orders> getOrders() {
+		return ordersList;
+	}
+
+	public void setSalesOrders(List<Orders> orders) {
+		this.ordersList = orders;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Customer customer = (Customer) o;
+		return Objects.equals(companyName, customer.companyName) && Objects.equals(contactName, customer.contactName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), companyName, contactName);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringGenerator.generateInMultiLine(this);
+	}
 
 }
