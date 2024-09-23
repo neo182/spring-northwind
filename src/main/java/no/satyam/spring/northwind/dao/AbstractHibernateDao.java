@@ -5,10 +5,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
+@Transactional
 public abstract class AbstractHibernateDao<T extends Persistable> {
 
 	private Class<T> clazz;
