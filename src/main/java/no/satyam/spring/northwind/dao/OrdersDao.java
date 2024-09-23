@@ -27,4 +27,21 @@ public class OrdersDao extends AbstractHibernateDao<Orders> {
 		super.getCurrentSession().persist(orders);
 	}
 
+	public void removeOrderDetails(Orders orders, OrderDetails... orderDetails) {
+		if (orderDetails.length == 0) {
+			return;
+		}
+
+		assert orders.getCustomer() != null;
+		assert orders.getEmployee() != null;
+		assert orders.getShipper() != null;
+
+		for (OrderDetails details : orderDetails) {
+			orders.removeOrderDetails(details);
+		}
+
+		super.getCurrentSession().persist(orders);
+	}
+
+
 }
