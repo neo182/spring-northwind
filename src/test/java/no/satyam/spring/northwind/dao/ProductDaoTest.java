@@ -1,5 +1,6 @@
 package no.satyam.spring.northwind.dao;
 
+import jakarta.transaction.Transactional;
 import no.satyam.spring.northwind.config.HibernateConfig;
 import no.satyam.spring.northwind.domain.Product;
 import no.satyam.spring.northwind.testutil.TestDataProvider;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -48,6 +48,20 @@ class ProductDaoTest {
 		productDao.deleteById(productById.getId());
 		Product deletedProduct = productDao.findOne(productById.getId());
 		assertThat(deletedProduct, is(nullValue()));
+	}
+
+	@Test
+	public void shouldFindProductsWithProperty() {
+		Product product1 = dataProvider.getProduct();
+		Product product2 = dataProvider.getProduct();
+
+		product1.setProductName("ProductA");
+		product2.setProductName("ProductB");
+		productDao.create(product1);
+		productDao.create(product2);
+
+		assertThat(productDao.findByProperty("productName", "ProductA").size(), is(1));
+		assertThat(productDao.findByProperty("productName", "ProductB").size(), is(1));
 	}
 
 }

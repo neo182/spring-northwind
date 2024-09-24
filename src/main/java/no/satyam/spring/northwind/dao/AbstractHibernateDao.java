@@ -51,6 +51,13 @@ public abstract class AbstractHibernateDao<T extends Persistable> {
 		delete(entity);
 	}
 
+	public List<T> findByProperty(String propertyName, Object propertyValue) {
+		return sessionFactory.getCurrentSession()
+			.createQuery("SELECT e FROM " + clazz.getName() + " e WHERE e." + propertyName + " = :propertyValue", clazz)
+			.setParameter("propertyValue", propertyValue)
+			.getResultList();
+	}
+
 	protected Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
