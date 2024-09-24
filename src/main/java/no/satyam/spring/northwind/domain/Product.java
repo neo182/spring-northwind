@@ -33,11 +33,11 @@ public class Product extends AbstractPersistable<Long> {
 
 	private Boolean discontinued;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "CATEGORY_ID_FK"))
 	private Category category;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(name = "SUPPLIER_ID_FK"))
 	private Supplier supplier;
 

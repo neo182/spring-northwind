@@ -43,5 +43,4 @@ public class OrdersDao extends AbstractHibernateDao<Orders> {
 		super.getCurrentSession().persist(orders);
 	}
 
-
 }

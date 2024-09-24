@@ -76,4 +76,5 @@ class OrdersDaoTest {
 		ordersDao.removeOrderDetails(orders, details1);
 		assertThat(orders.getOrderDetailsList().size(), is(1));
 	}
+
 }
