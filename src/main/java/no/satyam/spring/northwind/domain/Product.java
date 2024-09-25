@@ -2,7 +2,6 @@ package no.satyam.spring.northwind.domain;
 
 import jakarta.persistence.*;
 import no.satyam.spring.northwind.util.ToStringGenerator;
-import org.hibernate.annotations.NaturalId;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.math.BigDecimal;
@@ -18,7 +17,6 @@ public class Product extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Column(unique = true)
-	@NaturalId
 	private String productName;
 
 	private String quantityPerUnit;
