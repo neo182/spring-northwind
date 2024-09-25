@@ -1,7 +1,10 @@
 package no.satyam.spring.northwind.domain;
 
 import jakarta.persistence.*;
-import no.satyam.spring.northwind.util.ToStringGenerator;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.math.BigDecimal;
@@ -12,6 +15,10 @@ import java.util.Objects;
  * @author srt
  */
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Product extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
@@ -42,97 +49,9 @@ public class Product extends AbstractPersistable<Long> {
 	@OneToMany(mappedBy = "product")
 	private List<OrderDetails> orderDetails;
 
-	public Product() {
-	}
-
 	@Override
 	public void setId(Long id) {
 		super.setId(id); // To change body of generated methods, choose Tools | Templates.
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public String getQuantityPerUnit() {
-		return quantityPerUnit;
-	}
-
-	public void setQuantityPerUnit(String quantityPerUnit) {
-		this.quantityPerUnit = quantityPerUnit;
-	}
-
-	public BigDecimal getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(BigDecimal unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-
-	public Integer getUnitsInStock() {
-		return unitsInStock;
-	}
-
-	public void setUnitsInStock(Integer unitsInStock) {
-		this.unitsInStock = unitsInStock;
-	}
-
-	public Integer getUnitsInOrder() {
-		return unitsInOrder;
-	}
-
-	public void setUnitsInOrder(Integer unitsInOrder) {
-		this.unitsInOrder = unitsInOrder;
-	}
-
-	public Integer getReoderLevel() {
-		return reoderLevel;
-	}
-
-	public void setReoderLevel(Integer reoderLevel) {
-		this.reoderLevel = reoderLevel;
-	}
-
-	public Boolean getDiscontinued() {
-		return discontinued;
-	}
-
-	public void setDiscontinued(Boolean discontinued) {
-		this.discontinued = discontinued;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public Supplier getSupplier() {
-		return supplier;
-	}
-
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
-	}
-
-	public List<OrderDetails> getOrderDetails() {
-		return orderDetails;
-	}
-
-	public void setOrderDetails(List<OrderDetails> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-
-	@Override
-	public String toString() {
-		return ToStringGenerator.generateInMultiLine(this);
 	}
 
 	@Override

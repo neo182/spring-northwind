@@ -2,54 +2,30 @@ package no.satyam.spring.northwind.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import no.satyam.spring.northwind.util.ToStringGenerator;
+import lombok.*;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * @author srt
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
 public class ApplicationUser extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
-
-	@Column(unique = true)
-	private String userName;
-
-	private String password;
 
 	@Override
 	public void setId(Long id) {
 		super.setId(id);
 	}
 
-	public String getUserName() {
-		return userName;
-	}
+	@Column(unique = true)
+	private String userName;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public ApplicationUser() {
-	}
-
-	public ApplicationUser(String userName, String password) {
-		this.userName = userName;
-		this.password = password;
-	}
-
-	@Override
-	public String toString() {
-		return ToStringGenerator.generateInMultiLine(this);
-	}
+	private String password;
 
 }

@@ -4,7 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
-import no.satyam.spring.northwind.util.ToStringGenerator;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.util.ArrayList;
@@ -15,6 +18,10 @@ import java.util.Objects;
  * @author srt
  */
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Shipper extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
@@ -27,9 +34,6 @@ public class Shipper extends AbstractPersistable<Long> {
 	@OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)
 	private List<Orders> ordersList = new ArrayList<>();
 
-	public Shipper() {
-	}
-
 	public Shipper(String companyName, String phone) {
 		this.companyName = companyName;
 		this.phone = phone;
@@ -38,30 +42,6 @@ public class Shipper extends AbstractPersistable<Long> {
 	@Override
 	public void setId(Long id) {
 		super.setId(id);
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public List<Orders> getOrders() {
-		return ordersList;
-	}
-
-	public void setSalesOrders(List<Orders> orders) {
-		this.ordersList = orders;
 	}
 
 	@Override
@@ -79,11 +59,6 @@ public class Shipper extends AbstractPersistable<Long> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), companyName);
-	}
-
-	@Override
-	public String toString() {
-		return ToStringGenerator.generateInMultiLine(this);
 	}
 
 }

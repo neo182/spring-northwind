@@ -3,7 +3,10 @@ package no.satyam.spring.northwind.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import no.satyam.spring.northwind.util.ToStringGenerator;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.util.ArrayList;
@@ -14,6 +17,10 @@ import java.util.Objects;
  * @author srt
  */
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Customer extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
@@ -44,9 +51,6 @@ public class Customer extends AbstractPersistable<Long> {
 	@OneToMany(mappedBy = "customer")
 	private List<Orders> ordersList = new ArrayList<>();
 
-	public Customer() {
-	}
-
 	public Customer(String companyName, String contactName, String contactTitle, String address, String city,
 			String region, String postalCode, String country, String phone, String fax) {
 		this.companyName = companyName;
@@ -66,94 +70,6 @@ public class Customer extends AbstractPersistable<Long> {
 		super.setId(id);
 	}
 
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getContactName() {
-		return contactName;
-	}
-
-	public void setContactName(String contactName) {
-		this.contactName = contactName;
-	}
-
-	public String getContactTitle() {
-		return contactTitle;
-	}
-
-	public void setContactTitle(String contactTitle) {
-		this.contactTitle = contactTitle;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getFax() {
-		return fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	public List<Orders> getOrders() {
-		return ordersList;
-	}
-
-	public void setSalesOrders(List<Orders> orders) {
-		this.ordersList = orders;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -169,11 +85,6 @@ public class Customer extends AbstractPersistable<Long> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), companyName, contactName);
-	}
-
-	@Override
-	public String toString() {
-		return ToStringGenerator.generateInMultiLine(this);
 	}
 
 }

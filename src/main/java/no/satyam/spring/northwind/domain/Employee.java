@@ -4,7 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
-import no.satyam.spring.northwind.util.ToStringGenerator;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.sql.Date;
@@ -16,6 +19,10 @@ import java.util.Objects;
  * @author srt
  */
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Employee extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
@@ -55,9 +62,6 @@ public class Employee extends AbstractPersistable<Long> {
 	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	private List<Orders> ordersList = new ArrayList<>();
 
-	public Employee() {
-	}
-
 	public Employee(String firstName, String lastName, String title, String titleOfCourtesy, Date birthDate,
 			Date hireDate, String address, String city, String region, String postalCode, String country,
 			String homePhone, String extension, String notes, String reportsTo) {
@@ -83,134 +87,6 @@ public class Employee extends AbstractPersistable<Long> {
 		super.setId(id); // To change body of generated methods, choose Tools | Templates.
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getTitleOfCourtesy() {
-		return titleOfCourtesy;
-	}
-
-	public void setTitleOfCourtesy(String titleOfCourtesy) {
-		this.titleOfCourtesy = titleOfCourtesy;
-	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public Date getHireDate() {
-		return hireDate;
-	}
-
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getHomePhone() {
-		return homePhone;
-	}
-
-	public void setHomePhone(String homePhone) {
-		this.homePhone = homePhone;
-	}
-
-	public String getExtension() {
-		return extension;
-	}
-
-	public void setExtension(String extension) {
-		this.extension = extension;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public String getReportsTo() {
-		return reportsTo;
-	}
-
-	public void setReportsTo(String reportsTo) {
-		this.reportsTo = reportsTo;
-	}
-
-	public List<Orders> getOrders() {
-		return ordersList;
-	}
-
-	public void setSalesOrders(List<Orders> orders) {
-		this.ordersList = orders;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -227,11 +103,6 @@ public class Employee extends AbstractPersistable<Long> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), firstName, lastName, birthDate);
-	}
-
-	@Override
-	public String toString() {
-		return ToStringGenerator.generateInMultiLine(this);
 	}
 
 }
