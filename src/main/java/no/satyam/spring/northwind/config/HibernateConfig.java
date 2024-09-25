@@ -2,9 +2,12 @@ package no.satyam.spring.northwind.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -18,6 +21,21 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(basePackages = { "no.satyam.spring.northwind.*" })
 public class HibernateConfig {
+
+	@Value("${spring.datasource.url}")
+	private String dataSourceUrl;
+
+	@Value("${spring.datasource.driver-class-name}")
+	private String driverClassName;
+
+	@Value("${spring.datasource.username}")
+	private String username;
+
+	@Value("${spring.datasource.password}")
+	private String password;
+
+	@Autowired
+	private Environment environment;
 
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
@@ -40,10 +58,10 @@ public class HibernateConfig {
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
-		dataSource.setUsername("sa");
-		dataSource.setPassword("sa");
+		dataSource.setDriverClassName(driverClassName);
+		dataSource.setUrl(dataSourceUrl);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 		return dataSource;
 	}
 
